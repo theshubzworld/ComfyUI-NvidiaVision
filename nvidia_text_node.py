@@ -35,29 +35,25 @@ class NVIDIATextNode:
             "required": {
                 "api_key": ("STRING", {"default": "", "multiline": False, "password": True}),
                 "model": ([
-                    # Top-Tier & Large Context Models
-                    "meta/llama3-70b-instruct",
-                    "mistralai/mixtral-8x22b-instruct",
-                    "snowflake/arctic",
+                    # --- State-of-the-Art & Large Scale ---
+                    "meta/llama-3.1-405b-instruct", # Highest quality, largest context
+                    "meta/llama-3.3-70b-instruct", # Newest top-tier model from Meta
+                    "mistralai/mixtral-8x22b-instruct", # Top-tier mixture-of-experts model
 
-                    # Strong & Balanced Models
-                    "google/gemma-7b",
-                    "meta/llama3-8b-instruct",
-                    "mistralai/mistral-7b-instruct-v0.2",
+                    # --- Excellent General-Purpose Models ---
+                    "meta/llama-3.1-70b-instruct",  # Excellent balance of performance and speed
+                    "nvidia/mistral-nemo-12b-instruct", # NVIDIA's optimized Mistral model
+                    "google/gemma-2-27b-it",        # Strong instruction-tuned model from Google
+                    "microsoft/phi-3-medium-128k-instruct", # Great for very long context
 
-                    # Efficient & Fast Models
-                    "google/gemma-2b",
-
-                    # Deprecated / Potentially Incorrect (kept for reference, but should be verified)
-                    # The following models from the original list could not be verified in the current
-                    # NVIDIA API documentation and may be deprecated or have different identifiers.
-                    # It's recommended to use the models listed above.
-                    "nvidia/teknium-openhermes-2.5-7b",
-                    "nvidia/nemotron-4-340b-reward",
-                    "nvidia/nemotron-4-340b-instruct",
+                    # --- Fast, Efficient & Small Models ---
+                    "meta/llama-3.1-8b-instruct",   # Best in class for its size
+                    "microsoft/phi-3-mini-128k-instruct", # Very fast with a large context window
+                    "google/gemma-2-9b-it",         # Efficient and capable
+                    "mistralai/mistral-large",      # Solid all-around performer
                 ], {
-                    "default": "meta/llama3-70b-instruct",
-                    "description": "Select the text generation model. Models with '-instruct' are fine-tuned for instruction following."
+                    "default": "meta/llama-3.3-70b-instruct",
+                    "description": "Select the text generation model. Models with '-instruct' or '-it' are fine-tuned for instruction following."
                 }),
                 "prompt": ("STRING", {
                     "default": "A majestic lion surveying its kingdom from a high cliff at sunset, cinematic lighting.",
@@ -65,7 +61,7 @@ class NVIDIATextNode:
                     "dynamicPrompts": True
                 }),
                 "system_prompt": ("STRING", {
-                    "default": "You are a master visual prompt engineer. When given keywords, generate a single, concise, and imaginative AI image prompt. Include only visual details: composition, perspective, depth, lighting, shadows, colours, texture, style, technique, mood, atmosphere, and focal points. Capture the richness and aesthetics a professional artist would consider. Do not include explanations, labels, step-by-step instructions, or extra text. Output only the descriptive prompt itself, in one paragraph, ready for AI image generation. you should write prompt under 300 words.",
+                    "default": "You are an expert AI art prompt engineer. Create a concise, detailed, and visually rich prompt for an AI image generator based on the user's input. Focus on composition, lighting, and mood.",
                     "multiline": True
                 }),
                 "max_tokens": ("INT", {"default": 1024, "min": 16, "max": 8192, "step": 8}),
@@ -207,3 +203,4 @@ NODE_DISPLAY_NAME_MAPPINGS = {
 }
 
 __all__ = ['NODE_CLASS_MAPPINGS', 'NODE_DISPLAY_NAME_MAPPINGS']
+

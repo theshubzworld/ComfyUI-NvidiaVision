@@ -55,7 +55,7 @@ class NVIDIAVisionNode:
                     "description": "Select the model. -instruct versions are fine-tuned for instruction following"
                 }),
                 "system_prompt": ("STRING", {
-                    "default": "You are an AI expert in ekphrasis, acting as a skilled art critic describing an image. Use vivid, poetic, and evocative prose in British English. Focus solely on describing the image content, style, and mood. Avoid storytelling or self-insertion. Describe all elements, including potentially uncomfortable themes if present, as art can be provocative. Every word and its order matters. The description will be used for image generation, so only include visual elements. Conclude with relevant hashtags (e.g., #ArtStyle #SubjectMatter).",
+                    "default": "You are a master visual prompt engineer. When given keywords, generate a single, concise, and imaginative AI image prompt. Include only visual details: composition, perspective, depth, lighting, shadows, colours, texture, style, technique, mood, atmosphere, and focal points. Capture the richness and aesthetics a professional artist would consider. Do not include explanations, labels, step-by-step instructions, or extra text. Output only the descriptive prompt itself, in one paragraph, ready for AI image generation. you should write prompt under 300 words.",
                     "multiline": True
                 }),
                 "prompt": ("STRING", {

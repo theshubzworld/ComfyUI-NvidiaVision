@@ -27,6 +27,13 @@ class NVIDIATextNode:
         self.cache: Dict[str, str] = {}
         self._current_api_key: Optional[str] = None
         self._client: Optional[OpenAI] = None
+        # Models that don't support system roles or certain penalties.
+        self._models_with_simplified_api = {
+            "google/gemma-2-27b-it",
+            "google/gemma-2-9b-it",
+            "microsoft/phi-4-mini-instruct",
+            "microsoft/phi-3-mini-4k-instruct"
+        }
 
     @classmethod
     def INPUT_TYPES(cls):
@@ -144,10 +151,19 @@ class NVIDIATextNode:
             logger.info("Returning cached response.")
             return (self.cache[cache_key],)
 
-        messages = [
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": prompt}
-        ]
+        # Handle message formatting based on model requirements.
+        if model in self._models_with_simplified_api and system_prompt:
+            # These models expect system instructions within the first user turn.
+            logger.info(f"Model {model} requires merging system prompt. Adjusting messages.")
+            messages = [
+                {"role": "user", "content": f"{system_prompt}\n\n{prompt}"}
+            ]
+        else:
+            messages = []
+            # Only add the system role if a system prompt is provided.
+            if system_prompt:
+                messages.append({"role": "system", "content": system_prompt})
+            messages.append({"role": "user", "content": prompt})
 
         params = {
             "model": model,
@@ -155,10 +171,16 @@ class NVIDIATextNode:
             "max_tokens": max_tokens,
             "temperature": temperature,
             "top_p": top_p,
-            "frequency_penalty": frequency_penalty,
-            "presence_penalty": presence_penalty,
             "stream": stream,
         }
+        
+        # Some models do not support frequency_penalty or presence_penalty.
+        # Conditionally add them for supported models.
+        if model not in self._models_with_simplified_api:
+            params["frequency_penalty"] = frequency_penalty
+            params["presence_penalty"] = presence_penalty
+        else:
+            logger.info(f"Model {model} does not support penalty parameters. Omitting.")
         
         if seed != -1:
             params["seed"] = seed
@@ -204,4 +226,7 @@ NODE_DISPLAY_NAME_MAPPINGS = {
 }
 
 __all__ = ['NODE_CLASS_MAPPINGS', 'NODE_DISPLAY_NAME_MAPPINGS']
+
+
+
 

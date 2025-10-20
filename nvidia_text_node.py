@@ -42,15 +42,16 @@ class NVIDIATextNode:
 
                     # --- Excellent General-Purpose Models ---
                     "meta/llama-3.1-70b-instruct",  # Excellent balance of performance and speed
+                    "microsoft/phi-4-mini-instruct", # New powerful model from Microsoft
                     "nvidia/mistral-nemo-12b-instruct", # NVIDIA's optimized Mistral model
+                    "mistralai/mixtral-8x7b-instruct-v0.1", # Efficient and popular MoE model
                     "google/gemma-2-27b-it",        # Strong instruction-tuned model from Google
-                    "microsoft/phi-3-medium-128k-instruct", # Great for very long context
 
                     # --- Fast, Efficient & Small Models ---
                     "meta/llama-3.1-8b-instruct",   # Best in class for its size
-                    "microsoft/phi-3-mini-128k-instruct", # Very fast with a large context window
+                    "microsoft/phi-3-mini-4k-instruct", # Very fast with a decent context
                     "google/gemma-2-9b-it",         # Efficient and capable
-                    "mistralai/mistral-large",      # Solid all-around performer
+                    "meta/llama-3.2-1b-instruct",   # A very small, fast model for simple tasks
                 ], {
                     "default": "meta/llama-3.3-70b-instruct",
                     "description": "Select the text generation model. Models with '-instruct' or '-it' are fine-tuned for instruction following."

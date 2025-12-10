@@ -27,7 +27,7 @@
 
 2. Install the required dependencies:
    ```bash
-   pip install openai requests pillow numpy torch
+   python_embeded\python.exe -m pip install openai requests pillow numpy torch
    ```
 
 3. Restart ComfyUI

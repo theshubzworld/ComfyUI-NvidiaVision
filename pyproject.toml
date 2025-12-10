@@ -16,4 +16,4 @@ Repository = "https://github.com/theshubzworld/ComfyUI-NvidiaVision"
 [tool.comfy]
 PublisherId = "theshubzworld"
 DisplayName = "ComfyUI-NvidiaVision"
-Icon = ""
+Icon = "https://avatars.githubusercontent.com/u/176368083"

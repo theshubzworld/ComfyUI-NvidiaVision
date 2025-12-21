@@ -1,7 +1,7 @@
 [project]
 name = "ComfyUI-NvidiaVision"
 description = "ComfyUI nodes for NVIDIA AI Vision and Text models"
-version = "2.0.0"
+version = "2.1.0"
 license = {file = "LICENSE"}
 dependencies = [
     "openai>=1.0.0",
